@@ -6,6 +6,7 @@ import { setstatistics } from "../store/statisticsSlice";
 import { getStatistics } from "../services/api";
 import styled from "@emotion/styled";
 import { SiSpacex } from "react-icons/si";
+import { Song } from "../store/songSlice";
 
 const StatsContainer = styled.div`
 background-color: gray;
@@ -45,12 +46,15 @@ const TableCell = styled.td`
 `;
 
 
+
 const Statistics = () => {
+
   const { statistics }: any = useSelector(
     (state: RootState) => state.statistics
   );
 
   const dispatch = useDispatch();
+
 
   useEffect(() => {
     const fetchStatsFromBackend = async () => {
@@ -101,7 +105,9 @@ const Statistics = () => {
          
           <h2>Stastics Details # </h2>
 
-          <StatisticsTable>
+
+
+          {/* <StatisticsTable>
             <thead>
               <tr>
                 <TableHeader>Genre</TableHeader>
@@ -156,8 +162,71 @@ const Statistics = () => {
                 ))}
             </tbody>
           </StatisticsTable>
-          <SiSpacex />
+          <SiSpacex /> */}
 
+<StatisticsTable>
+        <thead>
+          <tr>
+            <TableHeader>Genre</TableHeader>
+            <TableHeader>Count</TableHeader>
+          </tr>
+        </thead>
+        <tbody>
+          {statistics.songsInGenres &&
+            statistics.songsInGenres.map((item: any) => (
+              <tr key={item.genre}>
+                <TableCell>{item.genre}</TableCell>
+                <TableCell>{item.totalSongs}</TableCell>
+              </tr>
+            ))}
+        </tbody>
+      </StatisticsTable>
+      <SiSpacex />
+
+      {/* Display total songs by artist */}
+      <StatisticsTable>
+        <thead>
+          <tr>
+            <TableHeader>Artist</TableHeader>
+            <TableHeader>Count</TableHeader>
+          </tr>
+        </thead>
+        <tbody>
+          {statistics.songsByArtists &&
+            statistics.songsByArtists.map((item: any,) => (
+              <tr key={item.artist}>
+                <TableCell>{item.artist}</TableCell>
+                <TableCell>{item.totalArtists}</TableCell>
+              </tr>
+            ))}
+        </tbody>
+      </StatisticsTable>
+      <SiSpacex />
+
+      {/* Display total songs by album */}
+      <StatisticsTable>
+        <thead>
+          <tr>
+            <TableHeader>Album</TableHeader>
+            <TableHeader>Count</TableHeader>
+          </tr>
+        </thead>
+        <tbody>
+          {statistics.songsInAlbums &&
+            statistics.songsInAlbums.map((item: any) => (
+              <tr key={item.artist}>
+                <TableCell>{item.totalArtists}</TableCell>
+                <TableCell>{item.totalArtists}</TableCell>
+              </tr>
+            ))}
+        </tbody>
+      </StatisticsTable>
+      <SiSpacex />
+
+
+
+
+      <SiSpacex />
           <StatisticsTable>
             <thead>
               <tr>

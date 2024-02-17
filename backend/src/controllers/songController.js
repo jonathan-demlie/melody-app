@@ -116,29 +116,31 @@ const deleteSongById = async (req, res) => {
           { $group: { _id: '$genre', count: { $sum: 1 } } },
         ]).then((genres) => genres.length);
     
-        // Get genre counts
-        const genreCounts = await Song.aggregate([
-          { $group: { _id: '$genre', count: { $sum: 1 } } },
-        ]);
-    
-        // Get songs in genres
-        const songsInGenres = await Song.aggregate([
-          { $group: { _id: { genre: '$genre', song: '$name' } } },
-          { $project: { _id: 0, genre: '$_id.genre', song: '$_id.song' } }
-        ]);
-    
-        // Get songs by artists
-        const songsByArtists = await Song.aggregate([
-          { $group: { _id: { artist: '$artist', song: '$name' } } },
-          { $project: { _id: 0, artist: '$_id.artist', song: '$_id.song' } }
-        ]);
-    
-        // Get songs in albums
-        const songsInAlbums = await Song.aggregate([
-          { $group: { _id: { album: '$album', song: '$name' } } },
-          { $project: { _id: 0, album: '$_id.album', song: '$_id.song' } }
-        ]);
-    
+        
+        
+// Get genre counts
+const genreCounts = await Song.aggregate([
+  { $group: { _id: '$genre', count: { $sum: 1 } } },
+]);
+
+// Get songs in genres
+const songsInGenres = await Song.aggregate([
+  { $group: { _id: { genre: '$genre', song: '$name' }, count: { $sum: 1 } } },
+  { $project: { _id: 0, genre: '$_id.genre', song: '$_id.song', count: '$count' } }
+]);
+
+// Get songs by artists
+const songsByArtists = await Song.aggregate([
+  { $group: { _id: { artist: '$artist', song: '$name' }, count: { $sum: 1 } } },
+  { $project: { _id: 0, artist: '$_id.artist', song: '$_id.song', count: '$count' } }
+]);
+
+// Get songs in albums
+const songsInAlbums = await Song.aggregate([
+  { $group: { _id: { album: '$album', song: '$name' }, count: { $sum: 1 } } },
+  { $project: { _id: 0, album: '$_id.album', song: '$_id.song', count: '$count' } }
+]);
+
         // Get songs and albums for each artist
         const artistAlbumCounts = await Song.aggregate([
           {

@@ -5,7 +5,6 @@ import { updateSong as UPDATE } from '../store/songSlice';
 import { toast } from 'react-toastify';
 import styled from '@emotion/styled';
 import { IoMdClose } from 'react-icons/io';
-import loading from '../assets/loading.svg';
 
 
 interface UpdateSongProps {

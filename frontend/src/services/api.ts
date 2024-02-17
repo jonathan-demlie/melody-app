@@ -1,4 +1,5 @@
-import axiosInstance from '../helpers/api';
+import axiosInstance from '../helpers/axiosInstance';
+
 
 export const fetchSongs = async () => {
   try {
@@ -6,7 +7,7 @@ export const fetchSongs = async () => {
     if (response?.data && response?.data?.success) {
       return response.data; 
     } else {
-      throw new Error('Failed to fetch songs');
+      throw new Error(' Oops something goes wrong');
     }
   } catch (error) {
     console.error('Error fetching songs:', error);
