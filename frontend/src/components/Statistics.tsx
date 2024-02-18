@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/rootReducer";
-
 import { setstatistics } from "../store/statisticsSlice";
 import { getStatistics } from "../services/api";
 import styled from "@emotion/styled";
 import { SiSpacex } from "react-icons/si";
-import { Song } from "../store/songSlice";
 
 const StatsContainer = styled.div`
   background-color: gray;
