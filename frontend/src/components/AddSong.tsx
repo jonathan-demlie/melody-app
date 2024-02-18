@@ -85,12 +85,11 @@ const StyledButton = styled.button`
   gap: 0.5em;
   width: 100%;
   padding: 0.5em;
-  border-radius: 8px;
+  border-radius: 5px;
   border: none;
   background-color: green;
   color: white;
   font-size: 1em;
-  font-family: inherit;
   cursor: pointer;
 `;
 
@@ -118,6 +117,13 @@ const AddSong: React.FC<AddSongProps> = ({ onClose }) => {
       if (res?.success) {
         dispatch(ADD(res?.song));
         toast.success("Song added successfully");
+        // Reset input fields after successful addition
+        setNewSong({
+          title: "",
+          artist: "",
+          album: "",
+          genre: "",
+        });
       } else {
         console.log(res?.message);
         setError("Failed to add song");
@@ -141,9 +147,11 @@ const AddSong: React.FC<AddSongProps> = ({ onClose }) => {
         </ModalHeader>
         <ModalBody>
           <InputContainer>
-            <InputLabel>Title:</InputLabel>
+            <InputLabel htmlFor="title">Title:</InputLabel>
             <Input
+              id="title"
               type="text"
+              placeholder="Enter title"
               value={newSong?.title}
               onChange={(e) =>
                 setNewSong({ ...newSong, title: e.target.value })
@@ -152,9 +160,11 @@ const AddSong: React.FC<AddSongProps> = ({ onClose }) => {
             />
           </InputContainer>
           <InputContainer>
-            <InputLabel>Artist:</InputLabel>
+            <InputLabel htmlFor="artist">Artist:</InputLabel>
             <Input
+              id="artist"
               type="text"
+              placeholder="Enter artist"
               value={newSong.artist}
               onChange={(e) =>
                 setNewSong({ ...newSong, artist: e.target.value })
@@ -163,9 +173,11 @@ const AddSong: React.FC<AddSongProps> = ({ onClose }) => {
             />
           </InputContainer>
           <InputContainer>
-            <InputLabel>Album:</InputLabel>
+            <InputLabel htmlFor="album">Album:</InputLabel>
             <Input
+              id="album"
               type="text"
+              placeholder="Enter album"
               value={newSong.album}
               onChange={(e) =>
                 setNewSong({ ...newSong, album: e.target.value })
@@ -174,9 +186,11 @@ const AddSong: React.FC<AddSongProps> = ({ onClose }) => {
             />
           </InputContainer>
           <InputContainer>
-            <InputLabel>Genre:</InputLabel>
+            <InputLabel htmlFor="genre">Genre:</InputLabel>
             <Input
+              id="genre"
               type="text"
+              placeholder="Enter genre"
               value={newSong.genre}
               onChange={(e) =>
                 setNewSong({ ...newSong, genre: e.target.value })
@@ -188,7 +202,7 @@ const AddSong: React.FC<AddSongProps> = ({ onClose }) => {
 
           <StyledButton onClick={handleAddSong} disabled={addLoading}>
             Add Song
-            {addLoading && <h2>Loading...</h2>}
+            {addLoading}
           </StyledButton>
         </ModalBody>
       </ModalContent>

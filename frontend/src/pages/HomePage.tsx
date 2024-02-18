@@ -13,6 +13,7 @@ const HomePageContainer = styled.main`
   padding: 0;
   padding-top: 0em;
   background-color: lightgray;
+  font-family: 'Roboto';
   border-radius: 5px;
   color: black;
   overflow-y: auto;
@@ -24,6 +25,8 @@ const SongContainer = styled.div`
   width: 100%;
   max-height: 100%;
   background-color: white;
+  font-family: 'Roboto';
+
 `;
 const StatsContainer = styled.div`
   display: flex;

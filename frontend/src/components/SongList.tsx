@@ -28,9 +28,9 @@ const SongHeader = styled.h1`
   width: 100%;
   text-transform: uppercase;
   font-weight: 400;
+  font-family: "Roboto";
   color: black;
   position: relative;
-
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 `;
 const SongsTableContainer = styled.div`
@@ -42,6 +42,7 @@ const SongsTableContainer = styled.div`
   align-items: center;
   width: 100%;
   max-height: 100%;
+  font-family: "Roboto";
 `;
 const AddBtn = styled.button`
   display: flex;
@@ -258,7 +259,7 @@ const SongList = () => {
     GetSongs();
   }, [dispatch]);
 
-  if (songs.length === 0 || !statistics) {
+  if (!statistics) {
     return <h2> Loding....</h2>;
   }
 
