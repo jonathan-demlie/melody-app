@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "Manage information for songs",
+  "description": "melody app",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -22,4 +22,5 @@
   "devDependencies": {
     "nodemon": "^3.0.3"
   }
+  
 }
