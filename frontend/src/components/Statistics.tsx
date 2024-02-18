@@ -9,35 +9,29 @@ import { SiSpacex } from "react-icons/si";
 import { Song } from "../store/songSlice";
 
 const StatsContainer = styled.div`
-background-color: gray;
-display: flex-col;
-padding: 0;
-padding-top: 0.5em;
-background-color: white;
-border-radius: 5px;
-
+  background-color: gray;
+  display: flex-col;
+  padding: 0;
+  padding-top: 0.5em;
+  background-color: white;
+  border-radius: 5px;
 `;
-
 
 const StatisticsTable = styled.table`
   width: 100%;
   border-collapse: collapse;
   background-color: lightgray;
-
-  
 `;
 
 const TableHeader = styled.th`
   background-color: gray;
   padding: 8px;
   text-align: left;
-
 `;
 const StatsTableContainer = styled.th`
   background-color: whitegray;
   padding: 8px;
   text-align: left;
-
 `;
 
 const TableCell = styled.td`
@@ -45,16 +39,12 @@ const TableCell = styled.td`
   padding: 8px;
 `;
 
-
-
 const Statistics = () => {
-
   const { statistics }: any = useSelector(
     (state: RootState) => state.statistics
   );
 
   const dispatch = useDispatch();
-
 
   useEffect(() => {
     const fetchStatsFromBackend = async () => {
@@ -77,60 +67,59 @@ const Statistics = () => {
 
   return (
     <StatsContainer>
-      <h2>Songs Statistics</h2>
+      <h2> Overall Statistics</h2>
       {statistics && (
         <div>
           <StatisticsTable>
             <tbody>
               <tr>
-                <StatsTableContainer>Total Songs #</StatsTableContainer>
+                <StatsTableContainer>Total # Songs</StatsTableContainer>
                 <TableCell>{statistics?.totalSongs}</TableCell>
               </tr>
               <tr>
-                <StatsTableContainer>Total Artists #</StatsTableContainer>
+                <StatsTableContainer>Total # Artists</StatsTableContainer>
                 <TableCell>{statistics?.totalArtists}</TableCell>
               </tr>
               <tr>
-                <StatsTableContainer>Total Albums #</StatsTableContainer>
+                <StatsTableContainer>Total # Albums</StatsTableContainer>
                 <TableCell>{statistics?.totalAlbums}</TableCell>
               </tr>
               <tr>
-                <StatsTableContainer>Total Genres #</StatsTableContainer>
+                <StatsTableContainer>Total # Genres</StatsTableContainer>
                 <TableCell>{statistics?.totalGenres}</TableCell>
               </tr>
             </tbody>
           </StatisticsTable>
-
           <SiSpacex />
-         
-          <h2>Stastics Details # </h2>
 
+          <h2>Detail Stastics</h2>
+          <h3>Total # Songs in A Genre</h3>
 
-
-          {/* <StatisticsTable>
+          <StatisticsTable>
             <thead>
               <tr>
                 <TableHeader>Genre</TableHeader>
-                <TableHeader>Song</TableHeader>
+                <TableHeader>Total Songs</TableHeader>
               </tr>
             </thead>
             <tbody>
-              {statistics.songsInGenres &&
-                statistics.songsInGenres.map((item: any) => (
-                  <tr key={item.genre}>
-                    <TableCell>{item.genre}</TableCell>
-                    <TableCell>{item.song}</TableCell>
+              {statistics.genreCounts &&
+                statistics.genreCounts.map((item: any) => (
+                  <tr key={item._id}>
+                    <TableCell>{item._id}</TableCell>
+                    <TableCell>{item.count}</TableCell>
                   </tr>
                 ))}
             </tbody>
           </StatisticsTable>
           <SiSpacex />
 
+          <h3>Total # Songs in An Artist</h3>
           <StatisticsTable>
             <thead>
               <tr>
                 <TableHeader>Artist</TableHeader>
-                <TableHeader>Song</TableHeader>
+                <TableHeader>Total Songs</TableHeader>
               </tr>
             </thead>
             <tbody>
@@ -138,95 +127,14 @@ const Statistics = () => {
                 statistics.songsByArtists.map((item: any) => (
                   <tr key={item.artist}>
                     <TableCell>{item.artist}</TableCell>
-                    <TableCell>{item.song}</TableCell>
+                    <TableCell>{item.count}</TableCell>
                   </tr>
                 ))}
             </tbody>
           </StatisticsTable>
           <SiSpacex />
+          <h3>Total # Songs & Albums in An Artist</h3>
 
-          <StatisticsTable>
-            <thead>
-              <tr>
-                <TableHeader>Album</TableHeader>
-                <TableHeader>Song</TableHeader>
-              </tr>
-            </thead>
-            <tbody>
-              {statistics.songsInAlbums &&
-                statistics.songsInAlbums.map((item: any) => (
-                  <tr key={item.album}>
-                    <TableCell>{item.album}</TableCell>
-                    <TableCell>{item.song}</TableCell>
-                  </tr>
-                ))}
-            </tbody>
-          </StatisticsTable>
-          <SiSpacex /> */}
-
-<StatisticsTable>
-        <thead>
-          <tr>
-            <TableHeader>Genre</TableHeader>
-            <TableHeader>Count</TableHeader>
-          </tr>
-        </thead>
-        <tbody>
-          {statistics.songsInGenres &&
-            statistics.songsInGenres.map((item: any) => (
-              <tr key={item.genre}>
-                <TableCell>{item.genre}</TableCell>
-                <TableCell>{item.totalSongs}</TableCell>
-              </tr>
-            ))}
-        </tbody>
-      </StatisticsTable>
-      <SiSpacex />
-
-      {/* Display total songs by artist */}
-      <StatisticsTable>
-        <thead>
-          <tr>
-            <TableHeader>Artist</TableHeader>
-            <TableHeader>Count</TableHeader>
-          </tr>
-        </thead>
-        <tbody>
-          {statistics.songsByArtists &&
-            statistics.songsByArtists.map((item: any,) => (
-              <tr key={item.artist}>
-                <TableCell>{item.artist}</TableCell>
-                <TableCell>{item.totalArtists}</TableCell>
-              </tr>
-            ))}
-        </tbody>
-      </StatisticsTable>
-      <SiSpacex />
-
-      {/* Display total songs by album */}
-      <StatisticsTable>
-        <thead>
-          <tr>
-            <TableHeader>Album</TableHeader>
-            <TableHeader>Count</TableHeader>
-          </tr>
-        </thead>
-        <tbody>
-          {statistics.songsInAlbums &&
-            statistics.songsInAlbums.map((item: any) => (
-              <tr key={item.artist}>
-                <TableCell>{item.totalArtists}</TableCell>
-                <TableCell>{item.totalArtists}</TableCell>
-              </tr>
-            ))}
-        </tbody>
-      </StatisticsTable>
-      <SiSpacex />
-
-
-
-
-      <SiSpacex />
           <StatisticsTable>
             <thead>
               <tr>
@@ -242,6 +150,26 @@ const Statistics = () => {
                     <TableCell>{item.artist}</TableCell>
                     <TableCell>{item.totalSongs}</TableCell>
                     <TableCell>{item.totalAlbums}</TableCell>
+                  </tr>
+                ))}
+            </tbody>
+          </StatisticsTable>
+
+          <SiSpacex />
+          <h3>Total # Songs in Album</h3>
+          <StatisticsTable>
+            <thead>
+              <tr>
+                <TableHeader>Album</TableHeader>
+                <TableHeader>Total Songs</TableHeader>
+              </tr>
+            </thead>
+            <tbody>
+              {statistics.songsInAlbums &&
+                statistics.songsInAlbums.map((item: any) => (
+                  <tr key={item.album}>
+                    <TableCell>{item.album}</TableCell>
+                    <TableCell>{item.count}</TableCell>
                   </tr>
                 ))}
             </tbody>

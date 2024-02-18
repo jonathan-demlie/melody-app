@@ -3,7 +3,6 @@ import { fetchSongs, deleteSong } from "./../services/api";
 import { setSongs, deleteSong as DELETE } from "../store/songSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/rootReducer";
-import { TbMusicPlus } from "react-icons/tb";
 import styled from "@emotion/styled";
 import Modal from "react-modal";
 import AddSong from "./AddSong";
@@ -20,19 +19,24 @@ export interface Song {
 }
 
 const SongHeader = styled.h1`
-  text-align: left;
+  text-align: center;
   font-size: 2em;
-  margin: 0 0 0 1em;
   padding-top: 0.5em;
+  justify-content: center;
+  align-items: center;
+  position: relative;
   width: 100%;
   text-transform: uppercase;
-  font-weight: 500;
-  color: gray;
+  font-weight: 400;
+  color: black;
+  position: relative;
+
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 `;
 const SongsTableContainer = styled.div`
   display: flex;
   flex-direction: column;
+  position: relative;
   gap: 1em;
   justify-content: center;
   align-items: center;
@@ -44,15 +48,14 @@ const AddBtn = styled.button`
   gap: 0.5em;
   align-items: start;
   position: absolute;
-  top: 10px;
-  left: 10px; /* Adjust this value as needed */
+  top: 80px;
+  left: 45px;
   border-radius: 8px;
   padding: 0.5em 1em;
   border: 1px solid #008000;
   background-color: green;
   color: white;
 `;
-
 
 const BtnContainer = styled.div`
   display: flex;
@@ -68,29 +71,29 @@ const Table = styled.table`
     background-color: gray;
     color: white;
     th {
-      padding: 0.5em 1em;
+      padding: 0.5em 0.5em;
     }
   }
   tbody {
     tr {
-      &:nth-of-type(odd) {
+      &:nth-of-type(even) {
         background-color: #f2f2f2;
       }
       &:hover {
         background-color: #e6e6e6;
       }
       td {
-        padding: 0.5em 1em;
+        padding: 0.5em 0.5em;
       }
     }
   }
 `;
-const Td = styled.td`
+const BtnsCon = styled.td`
   display: flex;
   align-items: start;
+  position: relative;
   gap: 0.5em;
   width: 50px;
-  hight: 40px;
 `;
 const EdtBtn = styled.button`
   button {
@@ -194,19 +197,21 @@ const CancelBtn = styled.button`
 
 const SongList = () => {
   Modal.setAppElement("#root");
+
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [deleteError, setDeleteError] = useState("");
   const [addModal, setAddSong] = useState(false);
   const [updateModal, setUpdateModal] = useState(false);
   const [editingSong, setEditingSong] = useState({});
   const [deletingSong, setDeletingSong] = useState({} as Song);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [deleteLoading, setDeleteLoading] = useState(false);
-  const [deleteError, setDeleteError] = useState("");
 
   const { songs } = useSelector((state: RootState) => state.songs);
   const { statistics } = useSelector((state: RootState) => state.statistics);
+
   const dispatch = useDispatch();
 
-  const handleSongSelect = (song: Song) => () => {
+  const handleSongEdit = (song: Song) => () => {
     setUpdateModal(true);
     setEditingSong(song);
   };
@@ -236,25 +241,25 @@ const SongList = () => {
   };
 
   useEffect(() => {
-    const fetchSongsFromBackend = async () => {
+    const GetSongs = async () => {
       try {
         const res = await fetchSongs();
         if (res && res.songs) {
-          dispatch(setSongs(res.songs));
         } else {
-          console.error("Invalid response format:", res);
+          // console.error("Invalid  format:", res);
           toast.error("Error fetching songs, please try again later.");
         }
+        dispatch(setSongs(res.songs));
       } catch (error) {
-        console.error("Error fetching songs:", error);
+        // console.error("Error  songs:", error);
         toast.error("Error fetching songs, try again later.");
       }
     };
-    fetchSongsFromBackend();
+    GetSongs();
   }, [dispatch]);
 
   if (songs.length === 0 || !statistics) {
-    return <h2>Loding....</h2>;
+    return <h2> Loding....</h2>;
   }
 
   return (
@@ -287,12 +292,9 @@ const SongList = () => {
           song={editingSong as Song}
         />
       )}
-      <SongHeader>Songs:</SongHeader>
+      <SongHeader>List of Songs</SongHeader>
       <BtnContainer>
-        <AddBtn onClick={() => setAddSong(true)}>
-          <TbMusicPlus />
-          Create
-        </AddBtn>
+        <AddBtn onClick={() => setAddSong(true)}>Create</AddBtn>
       </BtnContainer>
       <Table>
         <thead>
@@ -301,7 +303,9 @@ const SongList = () => {
             <th>Artist</th>
             <th>Album</th>
             <th>Genre</th>
-            <th></th>
+            <th> Action </th>
+            <th> </th>
+            <th> </th>
           </tr>
         </thead>
         <tbody>
@@ -311,14 +315,14 @@ const SongList = () => {
               <td>{song.artist}</td>
               <td>{song.album}</td>
               <td>{song.genre}</td>
-              <Td>
+              <BtnsCon>
                 <EdtBtn>
-                  <button onClick={handleSongSelect(song)}>Edit</button>
+                  <button onClick={handleSongEdit(song)}>Edit</button>
                 </EdtBtn>
                 <DltBtn>
                   <button onClick={handleDeleteModal(song)}>Delete</button>
                 </DltBtn>
-              </Td>{" "}
+              </BtnsCon>
             </tr>
           ))}
         </tbody>

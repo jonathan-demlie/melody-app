@@ -18,7 +18,7 @@ interface UpdateSongProps {
   onClose: () => void;
 }
 
-const Modal = styled.div`
+const UpdateModal = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -30,6 +30,7 @@ const Modal = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 9999;
 `;
 const ModalContent = styled.div`
   width: 500px;
@@ -146,7 +147,7 @@ const UpdateSong: React.FC<UpdateSongProps> = ({ onClose, song }) => {
   };
 
   return (
-    <Modal>
+    <UpdateModal>
       <ModalContent>
         <ModalHeader>
           Update Song
@@ -203,7 +204,7 @@ const UpdateSong: React.FC<UpdateSongProps> = ({ onClose, song }) => {
           </StyledButton>
         </ModalBody>
       </ModalContent>
-    </Modal>
+    </UpdateModal>
   );
 };
 

@@ -10,7 +10,7 @@ interface AddSongProps {
   onClose: () => void;
 }
 
-const Modal = styled.div`
+const AddModal = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -22,6 +22,7 @@ const Modal = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 9999;
 `;
 const ModalContent = styled.div`
   width: 500px;
@@ -130,7 +131,7 @@ const AddSong: React.FC<AddSongProps> = ({ onClose }) => {
   };
 
   return (
-    <Modal>
+    <AddModal>
       <ModalContent>
         <ModalHeader>
           Add New Song
@@ -191,7 +192,7 @@ const AddSong: React.FC<AddSongProps> = ({ onClose }) => {
           </StyledButton>
         </ModalBody>
       </ModalContent>
-    </Modal>
+    </AddModal>
   );
 };
 
