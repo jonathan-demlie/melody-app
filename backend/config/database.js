@@ -2,12 +2,11 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 
 const connectDB = async () => {
-    const MONGODB_URL= 'mongodb://localhost:27017/melodyDB'
     
     try {
-        console.log("MONGODB_URL:", process.env.MONGODB_URL); // Add this line
+        console.log("MONGODB_URL:", process.env.MONGODB_URL);
 
-        await mongoose.connect(MONGODB_URL || '', {
+        await mongoose.connect(process.env.MONGODB_URL, {
             // useNewUrlParser: true,
             // useUnifiedTopology: true,
             // useCreateIndex: true,
