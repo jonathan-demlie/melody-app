@@ -1,23 +1,28 @@
-# Melody App Backend
+# Melody-App
+
+This repository contains crud song information project
+
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Introduction
 
 Welcome to the Melody App Backend! This project is built using the MERN (MongoDB, Express.js, React.js, Node.js) stack and provides an API for managing songs.
 
-## Installation
+- Can Do Crud Oprations of songs
+- Songs Statistics including Total # of songs, artists, albums, genres; # of songs in  every genre; # of songs & albums each artist has; and # songs in each album are included as Statistics on the home page.
 
-1. Clone the repository:
+## Features
 
-   ```bash
-   git clone https://github.com/jonathan-demlie/melody-app.git
-
-   cd melody-app/backend
-
-   npm install
-
-   Start Server:
-    npm start
-
-Start Server with Nodemon (for development):
-npm run dev
+- create a song
+- Edit a song
+- Delete a song
 
 API Endpoints
 
@@ -67,11 +72,44 @@ GET /api/statistics
 Retrieve overall statistics.
 
 
+## Installation
+
+To use the melody-app repository:
+
+`git clone https://github.com/jonathan-demlie/melody-app`
+
+Install dependencies first and setup environment variables as listed in the `.env.example` file
+
+## Usage
+
+### Setup backend
+
+`cd backend/ && npm install`
+
+### Setup frontend
+
+`cd frontend/ && npm install`
+
+### Run frontend
+
+`npm run dev`
+
+### Open your favorite web browser and navigate to:
+
+`http://localhost:5173`
+
+## Contribution
+
+You are welcome to contribute to this repository
 
 
 
+ [Frontend on Vercel](https://melody-app-sandy.vercel.app/).
+ 
+ [Backend on Render](https://backend-a0j0.onrender.com).
 
-This README.md file provides instructions for installation, getting started, API endpoints documentation, contribution guidelines, and license information. Customize it further as needed for your project. If you have any questions or need further assistance, feel free to ask!
 
 
+## License
 
+This is repository is under the ISC license.
