@@ -1,22 +1,34 @@
-### Building and running your application
+# My Melody-App Node.js Backend Docker Image
 
-When you're ready, start your application by running:
-`docker compose up --build`.
+This Docker image contains my Melody-app Node.js backend application.
 
-Your application will be available at http://localhost:5000.
+## Prerequisites
 
-### Deploying your application to the cloud
+Make sure you have Docker installed on your system. You can download and install Docker from [https://www.docker.com/get-started](https://www.docker.com/get-started).
 
-First, build your image, e.g.: `docker build -t myapp .`.
-If your cloud uses a different CPU architecture than your development
-machine (e.g., you are on a Mac M1 and your cloud provider is amd64),
-you'll want to build the image for that platform, e.g.:
-`docker build --platform=linux/amd64 -t myapp .`.
+## Usage
 
-Then, push it to your registry, e.g. `docker push myregistry.com/myapp`.
+To use this Docker image, follow these steps:
 
-Consult Docker's [getting started](https://docs.docker.com/go/get-started-sharing/)
-docs for more detail on building and pushing.
+1. Open your terminal.
+2. Run the following command to pull the Docker image:
 
-### References
-* [Docker's Node.js guide](https://docs.docker.com/language/nodejs/)
+    ```bash
+    docker pull yonatanzleader/backend:latest
+    ```
+    Image Size - 150MB
+
+3. Once the image is downloaded, you can run a container using the following command:
+
+    ```bash
+    docker run -p 5000:5000 yonatanzleader/backend:latest
+    OR
+    sudo docker run --env-file .env  -p 5000:5000 backend
+
+    ```
+
+   This will run the backend application inside a Docker container, and you can access it at [http://localhost:5000](http://localhost:5000).
+
+## Support
+
+If you encounter any issues or have questions, feel free to open an issue on [GitHub](https://github.com/jonathan-demlie/melody-app).

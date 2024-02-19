@@ -102,7 +102,7 @@ Install dependencies first and setup environment variables as listed in the `.en
 
 You are welcome to contribute to this repository
 
-
+## Check backend/README.Docker.md for Docker Documentations 
 
  [Frontend on Vercel](https://melody-app-sandy.vercel.app/).
  
